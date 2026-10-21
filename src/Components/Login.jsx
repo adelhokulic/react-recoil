@@ -1,24 +1,27 @@
-import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Alert, Button, Card, Container, Form, Navbar } from "react-bootstrap";
 import { userState } from "../States/userState";
-
+import { useForm } from "react-hook-form";
 const Login = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
+	const {
+		register,
+		handleSubmit,
+		setError,
+		formState: { errors },
+	} = useForm();
+
 	const setUserState = useSetRecoilState(userState);
 	const userData = useRecoilValue(userState);
 
-	const handleLogin = (e) => {
-		e.preventDefault();
-		if (email !== "admin@admin.com" || password !== "123456") {
-			setError("Pogrešan email ili lozinka.");
+	const handleLogin = (data) => {
+		if (data.email !== "admin@admin.com" || data.password !== "123456") {
+			setError("root", {
+				type: "manual",
+				message: "Invalid email or password.",
+			});
 			return;
 		}
-		setError("");
-		setUserState({ email: email, loggedIn: true });
-		setPassword("");
+		setUserState({ email: data.email, loggedIn: true });
 	};
 
 	const logout = () => {
@@ -34,7 +37,7 @@ const Login = () => {
 						<div className="d-flex align-items-center gap-3">
 							<span className="text-muted small">{userData.email}</span>
 							<Button variant="outline-danger" size="sm" onClick={logout}>
-								Logout
+								Log out
 							</Button>
 						</div>
 					</Container>
@@ -45,33 +48,33 @@ const Login = () => {
 					<Card className="login-card">
 						<Card.Body className="p-4">
 							<Card.Title as="h3" className="text-center mb-1">
-								Dobrodošli
+								Welcome back
 							</Card.Title>
 							<p className="text-center text-muted mb-4">
-								Prijavite se na svoj račun
+								Log in to your account
 							</p>
-							{error && <Alert variant="danger">{error}</Alert>}
-							<Form onSubmit={handleLogin}>
+							{errors.root && (
+								<Alert variant="danger">{errors.root.message}</Alert>
+							)}
+							<Form onSubmit={handleSubmit(handleLogin)}>
 								<Form.Group className="mb-3" controlId="loginEmail">
 									<Form.Label>Email</Form.Label>
 									<Form.Control
-										onChange={(e) => setEmail(e.target.value)}
+										{...register("email")}
 										type="email"
-										value={email}
 										placeholder="Enter your email"
 									/>
 								</Form.Group>
 								<Form.Group className="mb-4" controlId="loginPassword">
-									<Form.Label>Lozinka</Form.Label>
+									<Form.Label>Password</Form.Label>
 									<Form.Control
-										onChange={(e) => setPassword(e.target.value)}
+										{...register("password")}
 										type="password"
-										value={password}
 										placeholder="Enter your password"
 									/>
 								</Form.Group>
 								<Button type="submit" className="w-100">
-									Login
+									Log in
 								</Button>
 							</Form>
 						</Card.Body>

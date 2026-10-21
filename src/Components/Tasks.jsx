@@ -22,7 +22,7 @@ const Tasks = () => {
 						<Card.Body className="p-4">
 							<div className="d-flex align-items-center justify-content-between mb-3">
 								<Card.Title as="h4" className="fw-bold mb-0">
-									Moji taskovi
+									My tasks
 								</Card.Title>
 								<Badge bg="primary" pill>
 									{taskData.length}
@@ -31,12 +31,12 @@ const Tasks = () => {
 							<CreateTasks />
 
 							{taskData.length === 0 ? (
-								<p className="tasks-empty mb-0">Još nema taskova.</p>
+								<p className="tasks-empty mb-0">No tasks yet.</p>
 							) : (
 								<ListGroup className="task-list mt-4">
 									{taskData.map((taskName) => {
 										return (
-											<ListGroup.Item className="task-item">
+											<ListGroup.Item key={taskName} className="task-item">
 												<span className="task-name">{taskName}</span>
 												<Button
 													onClick={() => deleteTask(taskName)}

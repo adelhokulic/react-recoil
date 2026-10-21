@@ -1,8 +1,8 @@
 import { atom } from "recoil";
-import UserStateEffect from "../Effects/UserStateEffect";
+import localStorageEffect from "../Effects/localStorageEffect";
 
 export const tasksState = atom({
 	key: "tasksState",
 	default: [],
-	effects_UNSTABLE: [UserStateEffect()],
+	effects_UNSTABLE: [localStorageEffect("tasksData")],
 });

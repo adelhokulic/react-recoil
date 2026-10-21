@@ -1,14 +1,14 @@
-const LocalStorageEffect =
-	() =>
+const localStorageEffect =
+	(key) =>
 	({ setSelf, onSet }) => {
-		const savedValues = localStorage.getItem("userData");
+		const savedValues = localStorage.getItem(key);
 
 		if (savedValues !== null) {
 			setSelf(JSON.parse(savedValues));
 		}
 		onSet((newValue) => {
-			localStorage.setItem("userData", JSON.stringify(newValue));
+			localStorage.setItem(key, JSON.stringify(newValue));
 		});
 	};
 
-export default LocalStorageEffect;
+export default localStorageEffect;
