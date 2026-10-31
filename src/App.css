@@ -91,6 +91,28 @@
 	box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.15);
 }
 
+/* Dropdowns (select) look the same as input fields */
+.app .form-select {
+	padding: 10px 2.5rem 10px 14px;
+	font-size: 1rem;
+	border-color: var(--app-border);
+	border-radius: var(--app-radius);
+	background-color: var(--app-surface-soft);
+	color: var(--app-text);
+	cursor: pointer;
+	transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.app .form-select:hover {
+	background-color: var(--app-surface);
+}
+
+.app .form-select:focus {
+	background-color: var(--app-surface);
+	border-color: var(--app-primary);
+	box-shadow: 0 0 0 0.2rem var(--app-primary-soft);
+}
+
 .app .form-label {
 	font-size: 0.875rem;
 	font-weight: 600;
@@ -175,6 +197,13 @@
 	font-size: 1rem;
 }
 
+/* The task title field takes the free space; the category select stays narrow */
+.create-task-form .form-select {
+	flex: 0 0 auto;
+	width: 150px;
+	text-transform: capitalize;
+}
+
 .task-list {
 	display: flex;
 	flex-direction: column;
@@ -204,6 +233,65 @@
 	word-break: break-word;
 }
 
+/* Three columns: name on the left, category in the middle, buttons on the right */
+.task-list .task-item {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+}
+
+/* Task being edited: highlighted, while all other tasks fade out */
+.task-list .task-item.is-editing {
+	border-color: var(--app-primary);
+	background: var(--app-surface);
+	box-shadow: 0 0 0 3px var(--app-primary-soft), var(--app-shadow-sm);
+}
+
+.task-list:has(.is-editing) .task-item:not(.is-editing) {
+	opacity: 0.45;
+}
+
+.task-list .task-item {
+	transition: background 0.15s, box-shadow 0.15s, border-color 0.15s, opacity 0.2s;
+}
+
+.task-actions {
+	justify-self: end;
+	display: flex;
+	gap: 8px;
+}
+
+.task-actions .btn {
+	white-space: nowrap;
+}
+
+.task-category {
+	padding: 3px 10px;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	text-transform: capitalize;
+	white-space: nowrap;
+	background: var(--app-primary-soft);
+	color: var(--app-primary);
+}
+
+/* Optional: a different color for each category */
+.task-category.backend {
+	background: #e0e7ff;
+	color: #4338ca;
+}
+
+.task-category.frontend {
+	background: #dcfce7;
+	color: #15803d;
+}
+
+.task-category.design {
+	background: #fce7f3;
+	color: #be185d;
+}
+
 .tasks-empty {
 	margin-top: 16px;
 	padding: 32px 16px;
@@ -222,12 +310,27 @@
 	}
 
 	.task-list .task-item {
-		flex-direction: column;
-		align-items: stretch;
+		grid-template-columns: 1fr;
+	}
+
+	.task-category {
+		justify-self: start;
+	}
+
+	.task-actions {
+		justify-self: stretch;
+	}
+
+	.task-actions .btn {
+		flex: 1;
 	}
 
 	.create-task-form .btn {
 		padding-left: 14px !important;
 		padding-right: 14px !important;
+	}
+
+	.create-task-form .form-select {
+		width: 120px;
 	}
 }
