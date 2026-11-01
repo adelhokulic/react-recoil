@@ -264,6 +264,79 @@
 	white-space: nowrap;
 }
 
+/* Comments section: spans the full width of the task, under name/category/buttons */
+.task-comments {
+	grid-column: 1 / -1;
+	margin-top: 4px;
+	padding-top: 12px;
+	border-top: 1px dashed var(--app-border);
+}
+
+.comments-empty {
+	font-size: 0.85rem;
+	font-style: italic;
+	color: var(--app-text-faint);
+}
+
+.comment-list {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.comment-item {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 8px 10px 8px 12px;
+	border-left: 3px solid var(--app-primary-soft);
+	border-radius: 0 8px 8px 0;
+	background: var(--app-surface);
+}
+
+.comment-text {
+	font-size: 0.9rem;
+	color: var(--app-text);
+	line-height: 1.4;
+	word-break: break-word;
+	white-space: pre-wrap;
+}
+
+.task-comments .btn.comment-delete {
+	flex-shrink: 0;
+	padding: 0 4px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	color: var(--app-text-faint);
+	text-decoration: none;
+}
+
+.task-comments .btn.comment-delete:hover,
+.task-comments .btn.comment-delete:focus-visible {
+	color: var(--app-danger);
+	text-decoration: underline;
+}
+
+/* Comment form: smaller than the main forms, with some space above it */
+.task-comments form {
+	margin-top: 10px;
+}
+
+.task-comments .form-control {
+	padding: 6px 10px;
+	font-size: 0.875rem;
+}
+
+.task-comments .btn {
+	padding-left: 14px;
+	padding-right: 14px;
+	font-size: 0.875rem;
+}
+
 .task-category {
 	padding: 3px 10px;
 	border-radius: 999px;
