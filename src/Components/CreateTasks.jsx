@@ -75,7 +75,7 @@ const CreateTasks = () => {
 						})}
 					</Form.Select>
 					<Button type="submit" variant="primary" className="px-4">
-						Create task
+						Create Task
 					</Button>
 				</InputGroup>
 			</Form>
