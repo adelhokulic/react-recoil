@@ -19,10 +19,12 @@ const Tasks = () => {
 	const userData = useRecoilValue(userState);
 	const taskData = useRecoilValue(tasksState);
 	const setTaskData = useSetRecoilState(tasksState);
+
 	const [editedTaskId, setEditedTaskId] = useState(null);
 	const [editedName, setEditedName] = useState("");
 	const [editedCategory, setEditedCategory] = useState("");
 	const [editError, setEditError] = useState("");
+
 	const [openCommentsId, setOpenCommentsId] = useState(null);
 	const [commentText, setCommentText] = useState("");
 	const [commentError, setCommentError] = useState("");
@@ -81,6 +83,7 @@ const Tasks = () => {
 		const filteredTasks = taskData.filter((task) => task.id !== id);
 		setTaskData(filteredTasks);
 	};
+
 	const editTask = (id, name, category) => {
 		setEditedTaskId(id);
 		setEditedName(name);

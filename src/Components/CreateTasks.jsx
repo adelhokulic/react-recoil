@@ -39,7 +39,7 @@ const CreateTasks = () => {
 				id: Date.now(),
 				name: name,
 				category: data.category,
-				comments: []
+				comments: [],
 			},
 		]);
 		reset();
